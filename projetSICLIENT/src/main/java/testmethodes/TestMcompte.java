@@ -27,7 +27,11 @@ public class TestMcompte {
 	  		// TODO Auto-generated catch block
 	  		e.printStackTrace();
 	  	}
+	  	
+	  	System.out.println(mc.getMembre("aizen"));
+	  	
 
 	}
+	
 
 }
