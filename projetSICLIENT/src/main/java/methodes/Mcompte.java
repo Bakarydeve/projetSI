@@ -2,12 +2,15 @@ package methodes;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import donnees.Compte;
 import donnees.Evenement;
+import donnees.Membre;
 import eventsDAO.DAOException;
 import eventsDAO.DAO_JPA;
 import eventsDAO.Manager;
@@ -96,5 +99,38 @@ public class Mcompte {
     	}
     	return new String(hexChars);
     }
+    
+    
+	public Membre getMembre(String pseudo) throws DAOException	{
+		
+		DAO_JPA<Membre> daoMembre = new DAO_JPA<>(Membre.class);		
+		List<Membre> membres = new ArrayList<Membre>();		
+		membres = daoMembre.findAll(Membre.class);		
+		Membre membre = new Membre();		
+		StringBuilder sb = new StringBuilder();
+		
+		for(Membre m : membres)	{		
+			if(m.getPseudo().getPseudo().equals(pseudo))	{
+				membre = m;		
+				return membre;
+			}			
+		}
+			
+		/*
+		if(membre != null)	{		
+			sb.append("{");
+			sb.append("\"id\": " + membre.getCodeMembre() + ",");
+			sb.append("\"pseudo\": \"" + membre.getPseudo().getPseudo() + "\",");
+			sb.append("\"nom\": \"" + membre.getNom() + "\",");
+			sb.append("\"prenom\": \"" + membre.getPrenom() + "\",");
+			sb.append("\"age\": "  + membre.getAge() + ",");
+			sb.append("\"adresse\": \"" + membre.getAdresse() + "\"");
+			sb.append("}");			
+		}
+		
+		return sb.toString();
+		*/
+		return null;
+	}
 
 }

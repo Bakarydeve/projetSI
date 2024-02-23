@@ -22,8 +22,8 @@ public class TestMembre {
 	      // create
 	      String pseudo = "Amine";
 	      Compte cpt = em.find(Compte.class, pseudo);
-	      Membre membre = new Membre("Denki", "Leo", 25, "2 rue des archives", cpt);
-	      /*
+	      Membre membre = new Membre("Nael", "Leo", 25, "3 Avenue George", cpt);
+	      
 	      try {
 			daoMembre.create(membre);
 	      } catch (NoSuchAlgorithmException e) {
@@ -33,7 +33,7 @@ public class TestMembre {
 			// TODO Auto-generated catch block
 			System.out.println("Une erreur s'est produite lors de la création du profil : " + e.getMessage());
 	      }
-	      */
+	      
 	      // update
 	      short id = 2;
 	      membre = daoMembre.find(id);

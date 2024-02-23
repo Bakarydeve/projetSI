@@ -9,9 +9,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import donnees.Compte;
+import donnees.Membre;
 import eventsDAO.DAOException;
 import eventsDAO.DAO_JPA;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,11 +23,13 @@ import methodes.Mcompte;
 /**
  * Servlet implementation class CompteServlet
  */
+@WebServlet("/CheckSession")
 public class CompteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private DAO_JPA<Compte> daoCompte;
 	private Mcompte mcompte;
+	private HttpSession maSession;
        
     /**
      * @throws DAOException 
@@ -35,6 +39,7 @@ public class CompteServlet extends HttpServlet {
         super();
         daoCompte = new DAO_JPA<>(Compte.class);
         mcompte = new Mcompte();
+        
         
         // TODO Auto-generated constructor stub
     }
@@ -55,6 +60,27 @@ public class CompteServlet extends HttpServlet {
 		*/
 		String operation = request.getParameter("operation");
 		
+		PrintWriter out = response.getWriter();
+		
+		if (operation.equals("Session"))	{
+			response.setContentType("application/json");
+			JsonObject responseData = new JsonObject();
+			if (maSession.getAttribute("utilisateur") != null) {
+			    Membre utilisateur = (Membre) maSession.getAttribute("utilisateur");
+			    responseData.addProperty("loggedIn", true);
+			    responseData.addProperty("nom", utilisateur.getNom());
+			    responseData.addProperty("prenom", utilisateur.getPrenom());
+			    responseData.addProperty("adresse", utilisateur.getAdresse());
+			    responseData.addProperty("age", utilisateur.getAge());
+			    responseData.addProperty("pseudo", utilisateur.getPseudo().getPseudo());
+			} else {
+			    responseData.addProperty("loggedIn", false);
+			}
+			out.println(responseData.toString());
+			
+			System.out.println("tojson : " + responseData.toString());
+		}
+		
 		
 
 	}
@@ -74,12 +100,14 @@ public class CompteServlet extends HttpServlet {
 				"X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
 		response.addHeader("Access-Control-Max-Age", "1728000");
 		*/
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String operation = request.getParameter("operation");
 		
 
 		PrintWriter out = response.getWriter();
+		
+		maSession = request.getSession();
 
 		
 	  	if (operation.equals("Authentification")) {
@@ -101,12 +129,22 @@ public class CompteServlet extends HttpServlet {
 			//Compte cpt = mcompte.getEm().find(Compte.class, login);
 			
 			System.out.println(" login : " + login + " passwd : " + mdp);
-			
+		
 			try {
 				if(mcompte.Authentification(login, mdp))	{
 				System.out.println("Ahahaha fetch passe00");
-				HttpSession maSession = request.getSession();
-				//maSession.setAttribute("utilisateur", cpt);
+				if(maSession != null)	{
+					try {
+						maSession.setAttribute("utilisateur", mcompte.getMembre(login));
+						System.out.println("session : " + maSession.getAttribute("utilisateur"));
+					} catch (DAOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else	{
+					System.out.println("Session vide");
+				}
 				
 				out.println("yes");
 				//RequestDispatcher dispatcher = request.getRequestDispatcher("/authenifier.jsp");

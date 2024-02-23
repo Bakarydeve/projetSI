@@ -20,8 +20,8 @@ public class TestCompte {
 	      DAO_JPA<Compte> daoCompte = new DAO_JPA<>(Compte.class);
 	      
 	      // create
-	      Compte cpt = new Compte("Amine", "casse");
-	      daoCompte.create(cpt);
+	      Compte cpt = new Compte("Aimad", "etude");
+	      //daoCompte.create(cpt);
 	      
 	      //update
 	      String pseudo = "Amine";
