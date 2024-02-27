@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="donnees.Compte" %>
+<%@ page import="donnees.Membre" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,11 +10,11 @@
 </head>
 <body>
 	<% 
-		Compte cpt = (Compte) session.getAttribute("utilisateur");
+	Membre cpt = (Membre) session.getAttribute("utilisateur");
 	%>
 <h1> Info</h1>
 <ul>
-	<li> Login : <%=cpt.getPseudo()%> 
+	<li> Login : <%=cpt.getNom()%> 
 </ul>
 </body>
 </html>
