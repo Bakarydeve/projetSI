@@ -58,7 +58,14 @@ public class Mmembre {
 		for(Membre m : membres)	{
 			sb.append("{");
 			sb.append("\"id\": " + m.getCodeMembre() + ",");
-			sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
+			
+			if(m.getPseudo() == null)	{
+				sb.append("\"pseudo\": \"" + m.getPseudo() + "\",");
+			}
+			else {
+				sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
+			}
+			
 			sb.append("\"nom\": \"" + m.getNom() + "\",");
 			sb.append("\"prenom\": \"" + m.getPrenom() + "\",");
 			sb.append("\"age\": "  + m.getAge() + ",");
@@ -71,6 +78,16 @@ public class Mmembre {
 				sb.append("{");
 				sb.append("\"id\": " + e.getCodeEvenement() + ",");
 				sb.append("\"nom\": \"" + e.getNom() + "\",");
+				
+				if(e.getCodeLieu() == null) {
+					sb.append("\"lieu\": \"" + e.getCodeLieu() + "\",");
+				}
+				else	{
+					sb.append("\"lieu\": \"" + e.getCodeLieu().getNom() + "\",");
+				}
+				
+				
+				
 				sb.append("\"dateDebut\": \"" + e.getDateDebut() + "\",");
 				sb.append("\"dateFin\": \"" + e.getDateFin() + "\",");
 				sb.append("\"capacite\": " + e.getCapacite() + ",");

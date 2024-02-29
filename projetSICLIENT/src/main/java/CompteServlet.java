@@ -107,7 +107,7 @@ public class CompteServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		
-		maSession = request.getSession();
+		maSession = request.getSession(true);
 
 		
 	  	if (operation.equals("Authentification")) {

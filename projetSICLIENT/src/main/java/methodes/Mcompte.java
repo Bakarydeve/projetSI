@@ -109,10 +109,12 @@ public class Mcompte {
 		Membre membre = new Membre();		
 		StringBuilder sb = new StringBuilder();
 		
-		for(Membre m : membres)	{		
-			if(m.getPseudo().getPseudo().equals(pseudo))	{
-				membre = m;		
-				return membre;
+		for(Membre m : membres)	{
+			if(m.getPseudo() != null)	{
+				if(m.getPseudo().getPseudo().equals(pseudo))	{
+					membre = m;		
+					return membre;
+				}
 			}			
 		}
 			
