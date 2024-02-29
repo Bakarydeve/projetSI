@@ -37,4 +37,24 @@
     <servlet-name>Evenement</servlet-name>
     <url-pattern>/Evenement</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Membres</display-name>
+    <servlet-name>Membres</servlet-name>
+    <servlet-class>MembreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Membres</servlet-name>
+    <url-pattern>/Membres</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Lieus</display-name>
+    <servlet-name>Lieus</servlet-name>
+    <servlet-class>LieuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Lieus</servlet-name>
+    <url-pattern>/Lieus</url-pattern>
+  </servlet-mapping>
 </web-app>

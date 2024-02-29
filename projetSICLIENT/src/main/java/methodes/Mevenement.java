@@ -55,10 +55,13 @@ public class Mevenement {
 		short id = -1;
 		
 		for(Membre m : lm)	{
-			if(m.getPseudo().getPseudo().equals(pseudomembre))	{
-				id = m.getCodeMembre();
-				break;
+			if(m.getPseudo() != null)	{
+				if(m.getPseudo().getPseudo().equals(pseudomembre))	{
+					id = m.getCodeMembre();
+					break;
+				}
 			}
+			
 		}
 		
 		membre = daoMembre.find(id);
@@ -99,10 +102,13 @@ public class Mevenement {
 		short id = -1;
 		
 		for(Membre m : lm)	{
-			if(m.getPseudo().getPseudo().equals(pseudomembre))	{
-				id = m.getCodeMembre();
-				break;
+			if(m.getPseudo() != null)	{
+				if(m.getPseudo().getPseudo().equals(pseudomembre))	{
+					id = m.getCodeMembre();
+					break;
+				}
 			}
+			
 		}
 		
 		membre = daoMembre.find(id);
@@ -175,7 +181,12 @@ public class Mevenement {
 			for(Membre m : membres)	{
 				sb.append("{");
 				sb.append("\"id\": " + m.getCodeMembre() + ",");
-				sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
+				if(m.getPseudo() == null)	{
+					sb.append("\"pseudo\": \"" + m.getPseudo() + "\",");
+				}
+				else {
+					sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
+				}		
 				sb.append("\"nom\": \"" + m.getNom() + "\",");
 				sb.append("\"prenom\": \"" + m.getPrenom() + "\",");
 				sb.append("\"age\": "  + m.getAge() + ",");

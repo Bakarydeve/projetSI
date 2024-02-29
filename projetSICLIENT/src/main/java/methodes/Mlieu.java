@@ -60,25 +60,28 @@ public class Mlieu {
 				membres = e.getMembreList();
 				int cptmembres = 0;
 				sb.append("\"membres\":[");
-				for(Membre m : membres)	{
-					sb.append("{");
-					sb.append("\"id\": " + m.getCodeMembre() + ",");
-					sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
-					sb.append("\"nom\": \"" + m.getNom() + "\",");
-					sb.append("\"prenom\": \"" + m.getPrenom() + "\",");
-					sb.append("\"age\": "  + m.getAge() + ",");
-					sb.append("\"adresse\": \"" + m.getAdresse() + "\"");			
-					
-					if (cptmembres < membres.size() - 1) {
-		                sb.append("},");
-		            }
-		            else {
-		            	sb.append("}");
-		            }
-					
-					cptmembres++;
-					
+				if(membres != null)	{
+					for(Membre m : membres)	{
+						sb.append("{");
+						sb.append("\"id\": " + m.getCodeMembre() + ",");
+						sb.append("\"pseudo\": \"" + m.getPseudo().getPseudo() + "\",");
+						sb.append("\"nom\": \"" + m.getNom() + "\",");
+						sb.append("\"prenom\": \"" + m.getPrenom() + "\",");
+						sb.append("\"age\": "  + m.getAge() + ",");
+						sb.append("\"adresse\": \"" + m.getAdresse() + "\"");			
+						
+						if (cptmembres < membres.size() - 1) {
+			                sb.append("},");
+			            }
+			            else {
+			            	sb.append("}");
+			            }
+						
+						cptmembres++;
+						
+					}
 				}
+				
 				sb.append("]");
 				
 				
@@ -103,6 +106,8 @@ public class Mlieu {
             	sb.append("}");
             }
 			cptlieu++;
+			evenements.clear();
+			;
 			
 		}
 		
